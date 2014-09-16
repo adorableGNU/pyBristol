@@ -1,3 +1,5 @@
+GUI for bristol - based on python & tkinter
+
 There is only one reason this GUI exists! The reason is, that I needed a GUI for "Bristol".
 The "startBristol-script" is just perfect and easy to use, but not comfortable if you
 like to tinker around. And then there is this overbloated monoBristol, that needs - who

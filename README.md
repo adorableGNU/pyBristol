@@ -1,7 +1,7 @@
 pyBristol
 =========
 
-GUI for bristol based on python &amp; tkinter
+GUI for bristol - based on python &amp; tkinter
 
 There is only one reason this GUI exists! The reason is, that I needed a GUI for "Bristol".
 The "startBristol-script" is just perfect and easy to use, but not comfortable if you
