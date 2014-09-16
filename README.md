@@ -22,4 +22,4 @@ That is basicly the idea of this GUI. In addition you can save your config and y
 call the special help-file for your current synthesizer. Just take a look at the menu-bar and
 you will see how it works.
 
-*Contact:* adorablegnu@hushmail.com
+__Contact:__ adorablegnu@hushmail.com
