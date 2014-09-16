@@ -155,7 +155,7 @@ def bGuiHelp():
     guiScrollBar = ttk.Scrollbar(bGuiHelp)
     guiScrollBar.pack(side = RIGHT, fill = Y)
     bGuiWrapper = Text(bGuiHelp, bg = "white", fg = "black")
-    with open("./help/guihelp.txt", "r") as bGuiFile:
+    with open("./doc/guihelp.txt", "r") as bGuiFile:
         bGuiText = bGuiFile.read()
     bGuiWrapper.insert(END, bGuiText)
     bGuiWrapper.config(state = DISABLED, yscrollcommand = guiScrollBar.set)
@@ -172,7 +172,7 @@ def bMan():
     manScrollBar = ttk.Scrollbar(bShowMan)
     manScrollBar.pack(side = RIGHT, fill = Y)
     bManWrapper = Text(bShowMan, bg = "white", fg = "black")
-    with open("./help/bristolMan.txt", "r") as bManFile:
+    with open("./doc/bristolMan.txt", "r") as bManFile:
         bManText = bManFile.read()
     bManWrapper.insert(END, bManText)
     bManWrapper.config(state = DISABLED, yscrollcommand = manScrollBar.set)
@@ -190,7 +190,7 @@ def bReadme():
     rmScrollBar = ttk.Scrollbar(bShowRM)
     rmScrollBar.pack(side = RIGHT, fill = Y)
     bRMwrapper = Text(bShowRM, bg = "white", fg = "black")
-    rmFile = "./help/" + bMod + ".txt"
+    rmFile = "./doc/" + bMod + ".txt"
     with open(rmFile, "r") as bRMfile:
         bRMtext = bRMfile.read()
     bRMwrapper.insert(END, bRMtext)
