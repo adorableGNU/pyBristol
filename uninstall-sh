@@ -1,12 +1,12 @@
 #!/bin/sh
-if test $UID -ne 0; then
+if test $(id -u) -ne 0; then
     echo "You need root privileges to start this programm." >&2
     exit 1
 fi
 
 rm -rf /opt/pyBristol \
        /usr/bin/pyBristol \
-       /usr/share/applications/pyBristol.desktop\
+       /usr/share/applications/pyBristol.desktop \
        /usr/share/pixmaps/pyBristol.svg
 
 if test $? -eq 0; then

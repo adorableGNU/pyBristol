@@ -1,6 +1,6 @@
 #!/bin/sh
-if [ $# != 0 ]; then
-    echo -e "_____\nError: The GUI itself do not use any arguments.\n" >&2
+if test $# -ne 0; then
+    echo -e "_____\nInfo: The GUI itself do wether have any otions nor accept arguments.\n" >&2
 fi
 cd /opt/pyBristol
 /opt/pyBristol/pyBristol.py
