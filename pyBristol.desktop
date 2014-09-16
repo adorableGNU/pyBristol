@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Application;AudioVideo;Audio
+Exec=/usr/bin/pyBristol
+GenericName=GUI for Bristol
+Icon=/usr/share/pixmaps/pyBristol.svg
+Name=pyBristol
+StartupNotify=true
+Terminal=false
+Type=Application
+Version=1.0

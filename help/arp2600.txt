@@ -1,0 +1,27 @@
+    ARP 2600
+    --------
+
+This synth will probably never get a writeup, it is kind of beyond the scope of
+this document. There are some discrepancies with the original:
+
+The filters do not self oscillate, they require an input signal. The output
+stage is global to all voices so cannot be patched back into the signal path.
+The original did not have a chorus, only a spring reverb. The input stage has
+not been tested for either signal nor envelope following code. The voltage
+manipulators were not in the first bristol upload with this emulation (-60), 
+but a future release will include mixing inverters, a lag processor, and
+possibly also a Hz->V extractor. The unit has an extra LFO where the original
+had just a clock trigger circuit, it produces a TRI wave, can be used to
+trigger the AR envelope and be used for modulation. The electroswitch is
+unidirectional, two inputs switchable to one output. The sample and hold 
+circuit cannot accept an external clock. The Keyboard inputs to the VCO cannot
+accept and alternative signal other than the MIDI note with tracking of this 
+note either enabled or disabled.
+
+The rest works, ie, all the VCO/VCF/VCA/ENV/AMP and any of the 30 or so outputs
+can be repatched into any of the 50 or so inputs. Patches cause no overhead in
+the engine as it uses default buffering when not repatched, so feel free to put
+in as many cables as you can fit. Patches in the GUI still demand a lot of CPU
+cycles. Release -77 improved this about 5-fold and further improvements are in
+the pipeline: the 0.10 stream implemented color caching and XImage graphics
+interface which massively improved GUI performance.

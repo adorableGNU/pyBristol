@@ -1,0 +1,154 @@
+    Baumann BME-700
+    ---------------
+
+This unusual German synth had a build volume of about 500 units and only one
+useful source of information could be found on it: a report on repair work for
+one of the few existing examples at www.bluesynths.com. The BME systems were
+hand built and judging by some reports on build quality may have been sold in
+kit form. The unit was produced in the mid 1970's.
+
+The synth has a very interesting design, somewhat reminiscent of the Moog Sonic
+and Explorer synths. It has two modulating LFO with fairly high top frequency,
+two filter and two envelopes. The envelopes are either AR or ASR but they can
+be mixed together to generate amongst other features an ADSR, very innovative.
+There is only one oscillator but the sound is fattened out by the use of two
+parallel filters, one acting as a pure resonator and the other as a full VCF.
+
+The synth has been left with a minimum of overhead. There are just 8 memory
+locations on the front panel with Load, Save and Increment buttons and one
+panel of options to adjust a few parameters on the oscillator and filters. It
+is possible to get extra memories by loading banks with -load: if you request
+starting in memory #21 the emulator will stuff 20 into the bank and 1 into the
+memory location. There is no apparant midi channel selector, use -channel <n>
+and then stay on it. This could have been put into the options panel however 
+having midi channel in a memory is generally a bad idea.
+
+    A. MOD
+
+        Two LFO:
+
+            frequency from 0.1 to 100 Hz
+            Triangle and Square wave outputs
+
+        Mix control
+
+            Mod-1/2 into the VCO FM
+            Env-1/Mod-2 into the VCO FM
+
+    B. Oscillator
+
+        Single VCO
+
+            Glide 0 to 10s, on/off.
+            PW Man: 5 to 50% duty cycle
+            Auto depth:
+
+                    Envelope-1
+                    Mod-1, Mod-1/2, Tri/Square
+
+            Vibrato depth
+            Tuning
+                8', 4', 16' transposition
+
+            Shape
+
+                continuous control from Square to Tri wave.
+
+        Mix of noise or VCO output
+
+    C. Res Filter
+
+        Sharp (24db/Oct), Flat (12dB/Oct)
+        5 frequency switches
+
+    D. Envelopes
+
+        Two envelopes
+
+            Rise time
+            Fall Time
+            AR/ASR selector
+
+            Two independent mixes of Env, for VCF and VCA.
+
+    E. Filter
+
+        Frequency
+        Resonance
+        Env/Mod selector
+
+        Modulation
+
+            KBD tracking
+            Mod-1 or Mod-2, Tri/Square
+
+    F. Amplifier
+
+        Mix resonator/filter.
+        Volume
+
+        Mod depth
+
+            Mod-1 or Mod-2, Tri/Square
+
+The oscillator is implemented as a non-resampling signal generator, this means
+it uses heuristics to estimate the wave at any given time. The harmonic content
+is a little thin and although the generation method seems to be correct in how
+it interprets signal ramps and drains from an analogue circuit this is one area
+of improvement in the emulator. There are options to produce multiple waveforms
+described below.
+
+The resonant filter is implemented with a single Houvilainen and actually only
+runs at 24dB/Oct. There are controls for remixing the different taps, a form
+of feedforward and when in 'Flat' mod there is more remixing of the poles, this
+does generate a slower roll off but gives the signal a bit more warmth than a
+pure 12dB/Oct would.
+
+
+There is a selector in the Memory section to access some options:
+
+    G. Options
+
+        LFO
+
+            Synchronise wave to key on events
+            Multi LFO (per voice).
+
+        Oscillator
+
+            Detune (temperature sensitivity)
+            Multi - remix 8' with 16' or 4'.
+
+        Noise
+
+            Multi Noise (per voice).
+            White/Pink
+            Pink Filter
+
+        ResFilter
+
+            Sharp Resonance/Remix
+            Flat Resonance/Remix
+
+        Envelope
+
+            Velocity Sensitive
+            Rezero for note on
+            Gain
+
+        Filter
+
+            Remix
+            KBD tracking depth
+
+The emulator probably gives the best results with the following:
+
+startBristol -bme700 -mono -hnp -retrig -channel 1
+
+This gives a monophonic emulation with high note preference and multiple
+triggers.
+
+The options from section G are only loaded under two circumstances: at system
+start from the first selected memory location and if the Load button is given
+a DoubleClick. All other memory load functions will inherrit the settings that
+are currently active.

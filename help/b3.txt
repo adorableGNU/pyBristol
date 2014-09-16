@@ -1,0 +1,278 @@
+   Hammond B3 (dual manual)
+    ------------------------
+
+The author first implemented the Hammond module, then extended it to the B3
+emulation. Users of this are too numerous to mention and the organ is still
+popular. Jimmy Smith, Screaming Jay Hawkins, Kieth Emerson, Doors and 
+almost all american gospel blues. Smith was profuse, using the instrument for
+a jazz audience, even using its defects (key noise) to great effect. Emerson
+had two on stage, one to play and another to kick around, even including
+stabbing the keyboard with a knife to force keylock during performances
+(Emerson was also a Moog fan with some of the first live performances). He
+also used the defects of the system to great effect, giving life to the over-
+driven Hammond sound.
+
+The Hammond was historically a mechanical instrument although later cheaper
+models used electronics. The unit had a master motor that rotated at
+the speed of the mains supply. It drove a spindle of cog wheels and next to 
+each cog was a pickup. The pickup output went into the matrix of the harmonic
+drawbars. It was originally devised to replace the massive pipe organs in
+churches - Hammond marketed their instruments with claims that they could not be
+differentiated from the mechanical pipe equivalent. He was taken to court by
+the US government for misrepresentation, finally winning his case using a double
+blind competitive test against a pipe organ, in a cathedral, with speakers
+mounted behind the organ pipes and an array of music scholars, students and 
+professionals listening. The results spoke for themselves - students would
+have scored better by simply guessing which was which, the professionals
+fared only a little better than that. The age of the Hammond organ had arrived.
+
+The company had a love/hate relationship with the Leslie speaker company - the
+latter making money by selling their rotary speakers along with the organ to
+wide acceptance. The fat hammond 'chorus' was a failed attempt to distance
+themselves from Leslie. That was never achieved due to the acceptance of the
+Leslie, but the chorus did add another unique sound to the already awesome
+instrument. The rotary speaker itself still added an extra something to the
+unique sound that is difficult imagine one without the other. It has a wide
+range of operating modes most of which are included in this emulator.
+
+The chorus emulation is an 8 stage phase shifting filter algorithm with a 
+linear rotor between the taps.
+
+Parameterisation of the first B3 window follows the original design:
+
+    Leslie: Rotary speaker on/off
+    Reverb: Reverb on/off
+    VibraChorus: 3 levels of vibrato, 3 of chorus.
+    Bright: Added upper harmonics to waveforms.
+
+Lower and Upper Manual Drawbars: The drawbars are colour coded into white for
+even harmonics and black for odd harmonics. There are two subfrequencies in 
+brown. The number given here are the length of organ pipe that would 
+correspond to the given desired frequency.
+
+    16    - Lower fundamental
+    5 1/3 - Lower 3rd fundamental
+    8     - Fundamental
+    4     - First even harmonic
+    2 2/3 - First odd harmonic
+    2     - Second even harmonic
+    1 3/5 - Second odd harmonic
+    1 1/3 - Third odd harmonic
+    1     - Third even harmonic
+
+The drawbars are effectively mixed for each note played. The method by which
+the mixing is done is controlled in the options section below. There were 
+numerous anomalies shown by the instrument and most of them are emulated.
+
+The Hammond could provide percussives effect the first even and odd harmonics.
+This gave a piano like effect and is emulated with Attack/Decay envelope.
+
+    Perc 4'     - Apply percussive to the first even harmonic
+    Perc 2 2/3' - Apply percussive to the first odd harmonic
+    Slow        - Adjust rate of decay from about 1/2 second to 4 seconds.
+
+    Soft        - Provide a soft attack to each note.
+
+The soft attack is an attempt to reduce the level of undesired key noise. The
+keyboard consisted of a metal bar under each key that made physical contact 
+with 9 sprung teeth to tap off the harmonics. The initial contact would generate
+noise that did not really accord to the pipe organ comparison. This was 
+reduced by adding a slow start to each key, but the jazz musicians had used
+this defect to great effect, terming it 'key click' and it became a part of
+the Hammond characteristics. Some musicians would even brag about how noisy
+there organ was.
+
+On the left had side are three more controls:
+
+    Volume potentiometer
+
+    Options switch discussed below.
+
+    Rotary Speed: low/high speed Leslie rotation. Shifts between the speeds
+    are suppressed to emulate the spin up and down periods of the leslie motors.
+
+The options section, under control of the options button, has the parameters
+used to control the emulation. These are broken into sections and discussed
+individually.
+
+Leslie:
+
+The Leslie rotary speaker consisted of a large cabinet with a bass speaker and
+a pair of high frequency air horns. Each were mounted on its own rotating table
+and driven around inside the cabinet by motors. A crossover filter was used to
+separate the frequencies driven to either speaker. Each pair was typically 
+isolated physically from the other. As the speaker rotated it would generate
+chorus type effects, but far richer in quality. Depending on where the speaker
+was with respect to the listener the sound would also appear to rotate. There
+would be different phasing effects based on signal reflections, different
+filtering effects depending on where the speaker was in respect to the cabinet
+producing differences resonances with respect to the internal baffling.
+
+    Separate:
+    Sync:
+    No Bass:
+        The Leslie had two motors, one for the horns and one for the voice coil
+        speaker. These rotated at different speeds. Some players preferred to 
+        have both rotate at the same speed, would remove the second motor and
+        bind the spindles of each speaker table, this had the added effect
+        that both would also spin up at the same rate, not true of the 
+        separated motors since each table had a very different rotary moment.
+        The 'No Bass' option does not rotate the voice coil speaker. This was
+        typically done since it would respond only slowly to speed changes,
+        this left just the horns rotating but able to spin up and down faster.
+
+    Brake:
+        Some cabinets had a brake applied to the tables such that when the
+        motor stopped the speakers slowed down faster.
+
+    X-Over:
+        This is the cross over frequency between the voice coil and air horns.
+        Uses a butterworth filter design.
+
+    Inertia:
+        Rate at which speaker rotational speed will respond to changes.
+
+    Overdrive:
+        Amount by which the amplifier is overdriven into distortion.
+
+    H-Depth/Frequency/Phase
+    L-Depth/Frequency/Phase
+        These parameters control the rotary phasing effect. The algorithm used
+        has three differently phased rotations used for filtering, phasing and
+        reverberation of the sound. These parameters are used to control the
+        depth and general phasing of each of them, giving different parameters
+        for the high and low speed rotations. There are no separate parameters
+        for the voice coil or air horns, these parameters are for the two
+        different speeds only, although in 'Separate' mode the two motors will
+        rotate at slightly different speeds.
+
+Chorus
+
+    V1/C1 - Lowest chorus speed
+    V2/C2 - Medium chorus speed
+    V3/C3 - High chorus speed
+
+Percussion:
+
+    Decay Fast/Slow - controls the percussive delay rates.
+    Attack Slow Fast - Controls the per note envelope attack time.
+
+The percussives are emulated as per the original design where there was a
+single envelope for the whole keyboard and not per note. The envelope will only
+restrike for a cleanly pressed note.
+
+Finally there are several parameters affecting the sine wave generation code.
+The Hammond used cogged wheels and coil pickups to generate all the harmonics,
+but the output was not a pure sine wave. This section primarily adjusts the
+waveform generation:
+
+    Preacher:
+        The emulator has two modes of operation, one is to generate the 
+        harmonics only for each keyed note and another to generate all of
+        them and tap of those required for whatever keys have been pressed.
+        Both work and have different net results. Firstly, generating each
+        note independently is far more efficient than generating all 90 odd
+        teeth, as only a few are typically required. This does not have totally
+        linked phases between notes and cannot provide for signal damping (see
+        below).
+        The Preacher algorithm generates all harmonics continuously as per the
+        original instrument. It is a better rendition at the expense of large
+        chunks of CPU activity. This is discussed further below.
+
+    Compress:
+        Time compress the sine wave to produce a slightly sharper leading edge.
+
+    Bright:
+        Add additional high frequency harmonics to the sine.
+
+    Click:
+        Level of key click noise
+    
+    Reverb:
+        Amount of reverb added by the Leslie
+    
+    Damping:
+        If the same harmonic was reused by different pressed keys then its net
+        volume would not be a complete sum, the output gain would decay as the
+        pickups would become overloaded. This would dampen the signal strength.
+        This is only available with the Preacher algorithm.
+
+The two reverse octaves are presets as per the original, however here they can
+just be used to recall the first 23 memories of the current bank. The lower
+manual 12 key is the 'save' key for the current settings and must be double
+clicked. It should be possible to drive these keys via MIDI, not currently 
+tested though. The default presets are a mixture of settings, the lower 
+manual being typical 'standard' recital settings, the upper manual being a
+mixture of Smith, Argent, Emerson, Winwood and other settings from the well
+known Hammond Leslie FAQ. You can overwrite them. As a slight anomaly, which
+was intentional, loading a memory from the these keys only adjusts the visible
+parameters - the drawbars, leslie, etc. The unseen ones in the options panel
+do not change. When you save a memory with a double click on the lower manual
+last reverse key then in contrast it saves all the parameters. This will not
+change.
+
+The Preacher algorithm supports a diverse set of options for its tonewheel
+emulation. These are configured in the file $BRISTOL/memory/profiles/tonewheel
+and there is only one copy. The file is a text file and will remain that way,
+it is reasonably documented in the file itself. Most settings have two ranges,
+one representing the normal setting and the other the bright setting for when
+the 'bright' button is pressed. The following settings are currently available:
+
+    ToneNormal: each wheel can be given a waveform setting from 0 (square)
+        through to 1.0 (pure sine) to X (sharpening ramp).
+
+    EQNormal: each wheel can be given a gain level across the whole generator.
+
+    DampNormal: each wheel has a damping factor (level robbing/damping/stealing)
+
+    BusNormal: each drawbar can be equalised globally.
+
+
+    ToneBright: each wheel can be given a waveform setting from 0 (square)
+        through to 1.0 (pure sine) to X (sharpening ramp) for the bright button.
+
+    EQBright: each wheel can be given a gain level across the whole generator.
+
+    DampBright: each wheel has a damping factor (level robbing/damping/stealing)
+
+    BusBright: each drawbar can be equalised globally.
+
+
+    stops: default settings for the eight drawbar gain levels.
+
+        The default is 8 linear stages.
+
+    wheel: enables redefining the frequency and phase of any given tonewheel
+
+        The defaults are the slightly non Even Tempered frequencies of the
+        Hammond tonewheels. The tonewheel file redefines the top 6 frequencies
+        that were slightly more out of tune due to the 192-teeth wheels and
+        a different gear ratio.
+
+    crosstalk: between wheels in a compartment and adjacent drawbar busses.
+
+        This is one area that may need extensions for crosstalk in the wiring
+        loom. Currently the level of crosstalk between each of the wheels in
+        the compartment can be individually defined, and drawbar bus crosstalk
+        also.
+
+    compartment: table of the 24 tonewheel compartments and associated wheels.
+
+    resistors: tapering resister definitions for equalisation of gains per
+        wheel by note by drawbar.
+
+    taper: definition of the drawbar taper damping resistor values.
+
+Improvements would come with some other alterations to the sine waveforms and
+some more EQ put into the leslie speaker. The speaker has three speeds, two of
+which are configurable and the third is 'stopped'. Changes between the different
+rates is controlled to emulate inertia.
+
+The net emulation, at least of the preacher algorithm, is reasonable, it is
+distinctively a Hammond sound although it does not have quite as much motor
+or spindle noise. The Bright button gives a somewhat rawer gearbox. It could do
+with a better amplifier emulation for overdrive.
+
+The damping algorithms is not quite correct, it has dependencies on which keys
+are pressed (upper/lower manual). Options drop shadow is taken from the wrong
+background bitmap so appears in an inconsistent grey.

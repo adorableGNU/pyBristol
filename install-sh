@@ -1,0 +1,14 @@
+#!/bin/sh
+if [ $UID != 0 ]; then
+    echo "You need root privileges to start this programm." >&2
+    exit 1
+fi
+mkdir /opt/pyBristol
+cp -R ./gif /opt/pyBristol/
+cp -R ./help /opt/pyBristol/
+cp -R ./icon /opt/pyBristol/
+cp ./default.conf /opt/pyBristol/
+install -D -m755 ./pyBristol.py /opt/pyBristol/
+install -D -m755 ./pyBristol /usr/bin/
+install -D -m644 ./pyBristol.desktop /usr/share/applications/
+install -D -m644 ./icon/pyBristol.svg /usr/share/pixmaps/
