@@ -1,7 +1,7 @@
 pyBristol
 =========
 
-_GUI for bristol - based on python &amp; tkinter_
+_GUI for bristol - based on python &amp; tkinter - anything else but mono_
 
 There is only one reason this GUI exists! The reason is, that I needed a GUI for "Bristol".
 The "startBristol-script" is just perfect and easy to use, but not comfortable if you
@@ -22,4 +22,4 @@ That is basicly the idea of this GUI. In addition you can save your config and y
 call the special help-file for your current synthesizer. Just take a look at the menu-bar and
 you will see how it works.
 
-Contact: adorablegnu@hushmail.com
+*Contact:* adorablegnu@hushmail.com
