@@ -1,5 +1,5 @@
 #!/bin/sh
-if [ $UID != 0 ]; then
+if test $UID -ne 0; then
     echo "You need root privileges to start this programm." >&2
     exit 1
 fi
@@ -9,7 +9,7 @@ rm -rf /opt/pyBristol \
        /usr/share/applications/pyBristol.desktop\
        /usr/share/pixmaps/pyBristol.svg
 
-if [ $? == 0 ]; then
+if test $? -eq 0; then
     echo "pyBristol was removed." >&2
 else
     echo "Something went wrong. Check manually if everything was removed." >&2

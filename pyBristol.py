@@ -1,4 +1,4 @@
-#!/bin/python
+#!/bin/env python3
 import sys, subprocess, configparser, shutil, os.path
 from tkinter import *
 from tkinter import messagebox
