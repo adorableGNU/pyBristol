@@ -5,7 +5,7 @@ if test $(id -u) -ne 0; then
 fi
 mkdir /opt/pyBristol
 cp -R ./gif /opt/pyBristol/
-cp -R ./help /opt/pyBristol/
+cp -R ./doc /opt/pyBristol/
 cp -R ./icon /opt/pyBristol/
 cp ./default.conf /opt/pyBristol/
 install -D -m755 ./pyBristol.py /opt/pyBristol/
