@@ -537,4 +537,4 @@ exitButton.grid(row = 0, column = 2)
 
 
 setCvars()
-frameB.mainloop()
+bGui.mainloop()
