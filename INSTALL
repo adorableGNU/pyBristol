@@ -5,3 +5,14 @@ To install pyBristol just make the "install-sh"-script executable
 and run it as root.
 
 To unintall make the scrict "uninstall-sh" executable and run it.
+
+=========
+[INSTALL]
+doc opt/pyBristol
+gif opt/pyBristol
+icon opt/pyBristol
+pyBristol.py opt/pyBristol
+default.conf opt/pyBristol
+pyBristol usr/bin/
+pyBristol.desktop /usr/share/applications/
+pyBristol.svg usr/share/pixmaps/
