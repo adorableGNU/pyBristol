@@ -20,7 +20,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import sys, subprocess, configparser, shutil, os.path
+import sys, subprocess, configparser, shutil, os.path, shlex
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
@@ -208,7 +208,8 @@ def bAbout():
 
 def runBristol():
     cLine = cVars.get()
-    subprocess.Popen(["/usr/bin/startBristol", cLine[13:]])
+    cArgs = shlex.split(cLine)
+    subprocess.Popen(cArgs)
     return
 
 
