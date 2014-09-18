@@ -202,7 +202,7 @@ def bReadme():
 
 
 def bAbout():
-    messagebox.showinfo(title = "About", message="pyBristol -- Version 1.0 --\nanything else but mono\n\nCopyright (C) 2014, adorableGNU\n\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you\nare welcome to redistribute it\nunder certain conditions.")
+    messagebox.showinfo(title = "About", message="pyBristol -- Version 1.0.25 --\nanything else but mono\n\nCopyright (C) 2014, adorableGNU\n\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you\nare welcome to redistribute it\nunder certain conditions.")
     return
 
 
