@@ -22,6 +22,6 @@ That is basicly the idea of this GUI. In addition you can save your config and y
 call the special helpfile for your current synthesizer. Just take a look at the menubar and
 you will see how it works.
 
-__Contact:__ adorablegnu@hushmail.com
-__AUR:__ https://aur.archlinux.org/packages/pybristol
+__Contact:__ adorablegnu@hushmail.com  
+__AUR:__ https://aur.archlinux.org/packages/pybristol  
 __PPA:__ ppa:adorablegnu/pybristol
