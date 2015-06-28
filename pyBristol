@@ -1,6 +1,6 @@
 #!/bin/sh
 if test $# -ne 0; then
-    echo -e "_____\nInfo: The GUI itself do wether have any otions nor accept arguments.\n" >&2
+    echo -e "_____\nInfo: The GUI itself do wether have any options nor accept arguments.\n" >&2
 fi
 cd /opt/pyBristol
 /opt/pyBristol/pyBristol.py
