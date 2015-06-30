@@ -31,10 +31,10 @@ class pyBristol:
     '''
     Main-Class for pyBristol.
     '''
-    def __init__(self, master):
+    def __init__(self):
         self.settingsConf = os.path.join(os.path.expanduser("~"), ".config", "pyBristol", "settings.conf")
         self.configFile()
-        self.tkRoot(master)
+        self.tkRoot()
         self.cVars = StringVar()
         self.bModel = StringVar()
         self.bDriver = StringVar()
@@ -73,7 +73,6 @@ class pyBristol:
         self.stopButton()
         self.exitButton()
         self.setCvars()
-        self.bGui.mainloop()
     
     def getSettings(self):
         for var in self.bSettings:
@@ -270,8 +269,8 @@ class pyBristol:
         config.read(self.settingsConf)
         self.bSettings = config["SETTINGS"]
     
-    def tkRoot(self, master):
-        self.bGui = master
+    def tkRoot(self):
+        self.bGui = Tk()
         self.bGui.geometry("850x500+150+100")
         self.bGui.resizable(0, 0)
         self.bGui.title("Python based GUI for Bristol")
@@ -540,4 +539,5 @@ class pyBristol:
         exitButton.grid(row=0, column=2)
 
 if __name__ == '__main__':
-    pB = pyBristol(Tk())
+    PYBRISTOL = pyBristol()
+    PYBRISTOL.bGui.mainloop()
