@@ -5,7 +5,7 @@ pyBristol - a python and tkinter based GUI for bristol - anything else but mono
 
 author: adorableGNU
 mail: adorablegnu@hushmail.com
-Copyright (C) 2014
+Copyright (C) 2014, 2015
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -26,13 +26,14 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 
+__version__ = "1.0.29"
+SETTINGS_CONF = os.path.join(os.path.expanduser("~"), ".config", "pyBristol", "settings.conf")
 
 class pyBristol:
     '''
     Main-Class for pyBristol.
     '''
     def __init__(self):
-        self.settingsConf = os.path.join(os.path.expanduser("~"), ".config", "pyBristol", "settings.conf")
         self.configFile()
         self.tkRoot()
         self.cVars = StringVar()
@@ -73,17 +74,17 @@ class pyBristol:
         self.stopButton()
         self.exitButton()
         self.setCvars()
-    
+
     def getSettings(self):
         for var in self.bSettings:
             self.__dict__[var].set(self.bSettings.get(var))
         return
-    
+
     def setDefaultConf(self):
-        if not os.path.exists(os.path.dirname(self.settingsConf)):
-             os.makedirs(os.path.dirname(self.settingsConf))
-        shutil.copyfile("default.conf", self.settingsConf)
-    
+        if not os.path.exists(os.path.dirname(SETTINGS_CONF)):
+             os.makedirs(os.path.dirname(SETTINGS_CONF))
+        shutil.copyfile("default.conf", SETTINGS_CONF)
+
     def setCvars(self, *args):
         bMod = self.bModel.get()
         if bMod != "b3":
@@ -166,26 +167,24 @@ class pyBristol:
         imgPath = os.path.join(os.path.curdir, "gif", img)
         self.bImg.configure(file=imgPath)
         return
-    
+
     def bSave(self):
-        with open(self.settingsConf, "w") as confFile:
+        with open(SETTINGS_CONF, "w") as confFile:
             confFile.write("[SETTINGS]\n")
             for var in self.bSettings:
                 confFile.write(var + " = " + self.__dict__[var].get() + "\n")
         messagebox.showinfo(title="Your config was saved...", message="The current settings will get loaded automatically next time.")
         return
-    
+
     def bRestore(self):
         bReset = messagebox.askyesno(title="Restoring default-settings...", message="Warning: If you proceed, all your settings will get lost. Do you wish to continue?")
         if bReset > 0:
             self.setDefaultConf()
-            config = configparser.ConfigParser()
-            config.optionxform = str
-            config.read(self.settingsConf)
+            self.configFile()
             self.getSettings()
             self.setCvars()
         return
-    
+
     def exitAll(self):
         mExit = messagebox.askokcancel(title="Exit", message="pyBristol will exit now...")
         if mExit > 0:
@@ -193,7 +192,7 @@ class pyBristol:
             self.bGui.destroy()
             sys.exit()
         return
-    
+
     def bGuiHelp(self):
         bGuiHelp = Toplevel(self.bGui)
         bGuiHelp.geometry("730x400+100+100")
@@ -211,7 +210,7 @@ class pyBristol:
         bGuiWrapper.pack(expand=1, fill=BOTH)
         bGuiHelp.bind("<Escape>", lambda e: bGuiHelp.destroy())
         return
-    
+
     def bMan(self):
         bShowMan = Toplevel(self.bGui)
         bShowMan.geometry("730x400+100+100")
@@ -228,7 +227,7 @@ class pyBristol:
         bManWrapper.pack(expand=1, fill=BOTH)
         bShowMan.bind("<Escape>", lambda e: bShowMan.destroy())
         return
-    
+
     def bReadme(self):
         bMod = self.bModel.get()
         bShowRM = Toplevel(self.bGui)
@@ -246,29 +245,29 @@ class pyBristol:
         bRMwrapper.pack(expand=1, fill=BOTH)
         bShowRM.bind("<Escape>", lambda e: bShowRM.destroy())
         return
-    
+
     def bAbout(self):
-        messagebox.showinfo(title="About", message="pyBristol -- Version 1.0.25 --\nanything else but mono\n\nCopyright (C) 2014, adorableGNU\n\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you\nare welcome to redistribute it\nunder certain conditions.")
+        messagebox.showinfo(title="About", message="pyBristol -- Version %s --\nanything else but mono\n\nThis program comes with ABSOLUTELY NO WARRANTY.\nThis is free software, and you\nare welcome to redistribute it\nunder certain conditions." % (__version__))
         return
-    
+
     def runBristol(self):
         cLine = self.cVars.get()
         cArgs = cLine.split()
         subprocess.Popen(cArgs)
         return
-    
+
     def stopBristol(self):
         subprocess.Popen(["startBristol", "-exit"])
         return
-    
+
     def configFile(self):
-        if not os.path.isfile(self.settingsConf):
+        if not os.path.isfile(SETTINGS_CONF):
             self.setDefaultConf()
         config = configparser.ConfigParser()
         config.optionxform = str
-        config.read(self.settingsConf)
+        config.read(SETTINGS_CONF)
         self.bSettings = config["SETTINGS"]
-    
+
     def tkRoot(self):
         self.bGui = Tk()
         self.bGui.geometry("850x500+150+100")
@@ -277,7 +276,7 @@ class pyBristol:
         iconfile = os.path.join(os.path.curdir, "icon", "pyBristol.gif")
         icon = Image("photo", file=iconfile)
         self.bGui.call("wm", "iconphoto", self.bGui._w, icon)
-    
+
     def tkFrames(self):
         self.frameA = Frame(self.bGui)
         self.frameA.pack(expand=1, fill=BOTH)
@@ -304,7 +303,7 @@ class pyBristol:
         self.frameD.columnconfigure(0, weight=1)
         self.frameD.columnconfigure(1, weight=1)
         self.frameD.columnconfigure(2, weight=1)
-    
+
     def tkMenu(self):
         bMenu = Menu(self.bGui, fg="black")
         #menu > file
@@ -338,7 +337,7 @@ class pyBristol:
         self.bGui.bind("<Control-h>", lambda e: self.bReadme())
         self.bGui.bind("<F5>", lambda e: self.runBristol())
         self.bGui.bind("<F6>", lambda e: self.stopBristol())
-    
+
     def generateModels(self): 
         bModelList = [("mini", "moog mini"),
                       ("explorer", "moog voyager"),
@@ -391,7 +390,7 @@ class pyBristol:
             if self.r == 12:
                 self.c += 1
                 self.r = 0
-    
+
     def driver(self):
         bLabelDriver = Label(self.frameB0, text=" driver:", fg="black")
         bLabelDriver.grid(row=0, column=0, padx=3, sticky=W)
@@ -409,7 +408,7 @@ class pyBristol:
                                         fg="black",
                                         command=self.setCvars)
             bDriverButton.grid(row=self.r, column=0, sticky=W)
-    
+
     def jackAutoconnect(self):
         self.bJackAbutton = Checkbutton(self.frameB0,
                                         text="autoconnect",
@@ -417,28 +416,28 @@ class pyBristol:
                                         fg="black",
                                         command=self.setCvars)
         self.bJackAbutton.grid(row=5, column=0, padx=2, sticky=W)
-     
+
     def sampleRate(self):
         bRateLabel = Label(self.frameB0, text="sample rate:", fg="black")
         bRateLabel.grid(row=0, column=1, sticky=W)
         bRateLine = Entry(self.frameB0, textvariable=self.bRate, width=9, fg="black", bg="white")
         bRateLine.grid(row=1, column=1, sticky=W)
         self.bRate.trace("w", self.setCvars)
-        
+
     def priority(self):
         bPriorityLabel = Label(self.frameB0, text="priority:", fg="black")
         bPriorityLabel.grid(row=2, column=1, sticky=W)
         bPriorityLine = Entry(self.frameB0, textvariable=self.bPriority, width=9, fg="black", bg="white")
         bPriorityLine.grid(row=3, column=1, sticky=W)
         self.bPriority.trace("w", self.setCvars)
-        
+
     def velocity(self):
         bVelocityLabel = Label(self.frameB0, text="velocity:", fg="black")
         bVelocityLabel.grid(row=4, column=1, sticky=W)
         bVelocityLine = Entry(self.frameB0, textvariable=self.bVelocity, width=9, fg="black", bg="white")
         bVelocityLine.grid(row=5, column=1, sticky=W)
         self.bVelocity.trace("w", self.setCvars)
-    
+
     def inputGain(self):
         bIgainLabel = Label(self.frameB1, text="input gain:", fg="black")
         bIgainLabel.grid(row=0, column=0, sticky=W)
@@ -451,7 +450,7 @@ class pyBristol:
                       bg="white",
                       command=self.setCvars)
         self.bIgain.grid(row=1, column=0, sticky=W)
-    
+
     def outputGain(self):
         bOgainLabel = Label(self.frameB1, text="output gain:", fg="black")
         bOgainLabel.grid(row=2, column=0, sticky=W)
@@ -464,7 +463,7 @@ class pyBristol:
                       bg="white",
                       command=self.setCvars)
         self.bOgain.grid(row=3, column=0, sticky=W)
-        
+
     def voices(self):
         bVoicesLabel = Label(self.frameB1, text="voices:", fg="black")
         bVoicesLabel.grid(row=4, column=0, sticky=W)
@@ -484,7 +483,7 @@ class pyBristol:
                                   variable=self.bMono,
                                   command=self.setCvars)
         bMonoButton.grid(row=5, column=0, padx=40, sticky=W)
-        
+
     def midiChannel(self):
         bChannelLabel = Label(self.frameB1, text="midi channel:", fg="black")
         bChannelLabel.grid(row=0, column=1, sticky=W)
@@ -497,21 +496,21 @@ class pyBristol:
                         bg="white",
                         command=self.setCvars)
         self.bChannel.grid(row=1, column=1, sticky=W)
-    
+
     def loadMemory(self):
         bMemoryLabel = Label(self.frameB1, text="load memory:", fg="black")
         bMemoryLabel.grid(row=2, column=1, sticky=W)
         bMemoryLine = Entry(self.frameB1, textvariable=self.bMemory, width=4, fg="black", bg="white")
         bMemoryLine.grid(row=3, column=1, sticky=W)
         self.bMemory.trace("w", self.setCvars)
-    
+
     def additionalArguments(self):
         bArgsLabel = Label(self.frameB1, text="extra arguments:", fg="black")
         bArgsLabel.grid(row=4, column=1, sticky=W)
         bArgsLine = Entry(self.frameB1, textvariable=self.bArgs, width=12, fg="black", bg="white")
         bArgsLine.grid(row=5, column=1, sticky=W)
         self.bArgs.trace("w", self.setCvars)
-    
+
     def thumbnail(self):
         bMod = self.bModel.get()
         imgPath = os.path.join(os.path.curdir, "gif", bMod + ".gif")
@@ -519,25 +518,25 @@ class pyBristol:
         bCanvas = Canvas(self.frameB2, height=147, width=277)
         bCanvas.create_image(0, 0, image=self.bImg, anchor=NW)
         bCanvas.pack()
-    
+
     def commandline(self):
         bLabelCL = Label(self.frameC, text=" commandline:", fg="black")
         bLabelCL.grid(row=0, column=0, sticky=W)
         bCommand = Entry(self.frameC, textvariable=self.cVars, width=300, fg="black", bg="white")
         bCommand.grid(row=1, column=0)
-    
-    def startButton(self):
-        startButton = ttk.Button(self.frameD, text="start", command=self.runBristol)
-        startButton.grid(row=0, column=0)
-    
-    def stopButton(self):
-        panicButton = ttk.Button(self.frameD, text="stop", command=self.stopBristol)
-        panicButton.grid(row=0, column=1)
-    
-    def exitButton(self):
-        exitButton = ttk.Button(self.frameD, text="exit", command=self.exitAll)
-        exitButton.grid(row=0, column=2)
 
-if __name__ == '__main__':
+    def startButton(self):
+        staButton = ttk.Button(self.frameD, text="start", command=self.runBristol)
+        staButton.grid(row=0, column=0)
+
+    def stopButton(self):
+        stoButton = ttk.Button(self.frameD, text="stop", command=self.stopBristol)
+        stoButton.grid(row=0, column=1)
+
+    def exitButton(self):
+        eButton = ttk.Button(self.frameD, text="exit", command=self.exitAll)
+        eButton.grid(row=0, column=2)
+
+if __name__ == "__main__":
     PYBRISTOL = pyBristol()
     PYBRISTOL.bGui.mainloop()
