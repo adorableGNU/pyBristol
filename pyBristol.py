@@ -26,7 +26,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 
-__version__ = "1.0.30"
+__version__ = "1.0.32"
 SETTINGS_CONF = os.path.join(os.path.expanduser("~"), ".config", "pyBristol", "settings.conf")
 
 class pyBristol:
