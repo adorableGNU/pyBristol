@@ -2,6 +2,7 @@
 Categories=Application;AudioVideo;Audio
 Exec=/usr/bin/pyBristol
 GenericName=GUI for Bristol
+GenericName[fr]=Interface graphique pour Bristol
 Icon=/usr/share/pixmaps/pyBristol.svg
 Name=pyBristol
 StartupNotify=true
